@@ -44,12 +44,6 @@ function storeVideo(fromWhere) {
     })
     storedVideo.src = URL.createObjectURL(blob);
 
-    if (fromWhere == 'play') {
-      audio.currentTime = storedVideo.currentTime;
-      storedVideo.play();
-      audio.play();
-    }
-
     if (fromWhere == 'upload') {
       database(blob);
     }
@@ -89,9 +83,9 @@ function daw(control) {
       storedVideo.currentTime = 0;
       audio.currentTime = 0;
       storedVideo.play();
-      setTimeout(() => {
+      setTimeout(() => {        
         audio.play();
-      }, 150);
+      }, 100);
     }
     if (window.recorder.state == 'recording') {
       window.recorder.stop();
@@ -121,7 +115,7 @@ function handleVisibilityChange() {
 function gotAudio() {
   if (!window.audioCtx) {
     // creation of new AudioContext
-    window.audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+    window.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     audioCtx = window.audioCtx;
 
     let DOMmusic = document.getElementById('audio');
@@ -267,9 +261,7 @@ buttons.addEventListener('click', (e) => {
 });
 
 storedVideo.onended = () => {
-  storedVideo.currentTime = 0;
-  audio.currentTime = 0;
-  storedVideo.play();
+  daw('play');
 }
 
 btnMic.onclick = () => {
