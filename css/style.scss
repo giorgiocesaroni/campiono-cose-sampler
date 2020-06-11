@@ -58,7 +58,6 @@ body {
   flex-flow: row wrap;
   color: white;
   justify-content: center;
-  align-items: center;
 }
 
 /* TEXT STYLING */
@@ -120,6 +119,7 @@ a {
   border-radius: 10px;
   padding: 5px;
   margin: 2rem;
+  align-self: flex-start;
 }
 
 .tutorial {
