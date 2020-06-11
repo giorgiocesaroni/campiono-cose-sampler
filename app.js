@@ -170,7 +170,7 @@ function handleErrors(e) {
   }
 
   if (e == 'BrowserError') {
-    txtError.innerHTML = `Ci dispiace, per ora ${ua.browser.family} non è supportato. Ti preghiamo di utilizzare Chrome su desktop.`
+    txtError.innerHTML = `Ci dispiace, per ora il tuo browser non è supportato. Ti preghiamo di utilizzare Chrome su desktop.`
   }
 }
 

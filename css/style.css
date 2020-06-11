@@ -44,10 +44,8 @@ body {
 
 /* MAIN STYLE */
 .container {
-  margin: auto;
-  width: 100%;
-  max-width: 1024px;
-  height: 100%;
+  width: inherit;
+  height: inherit;
   display: flex;
   flex-flow: row wrap;
   color: white;
@@ -87,32 +85,17 @@ a:link, a:visited, a:hover {
 .displayError {
   text-align: center;
   font-weight: 900;
-  position: fixed;
-  z-index: 1000;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: white;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-}
-
-.displayError h1 span {
-  color: #ddd;
-}
-
-.displayError img {
-  width: 175px;
-  height: 175px;
+  margin: 2rem 1rem 0 1rem;
 }
 
 .displayError .error {
-  margin: 1.25rem 1rem;
+  font-weight: 400;
+  color: white;
   max-width: 250px;
-  font-weight: 200;
 }
 
 .sampler {
@@ -243,6 +226,7 @@ a:link, a:visited, a:hover {
 
 .hide {
   opacity: 0;
+  margin: 0;
   pointer-events: none;
 }
 
