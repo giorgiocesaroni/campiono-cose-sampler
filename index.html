@@ -9,59 +9,61 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <!-- Error display-->
-<div class="displayError hide" id="displayError">
-  <p class="error" id="txtError"></p>
-</div>
 <div class="container">
-  <div class="sampler">   
-    <div class="videos" id="videos">
-      <video id="liveVideo" muted="true" playsinline="" autoplay=""></video>
-      <video class="hide" id="storedVideo" type="video/webm" playsinline="">
-        <audio id="audio" controls="" preload="auto">
-          <source src="idea1.mp3" type="audio/mpeg">
-        </audio>
-      </video>
-      <div class="mic-setup hidden" id="micSetup">
-        <div class="selection">Seleziona Microfono</div>
-        <div id="devices">
-          <!-- where the devices go-->
-        </div>
-      </div><img class="mic-icon half-opacity" id="btnMic" src="icns/mic-icon.svg" alt="Microphone choice icon">
-    </div>
-    <div id="buttons">
-      <div class="row1">   
-        <button id="btnPlay"><img src="icns/play-30.png" alt=""></button>
-        <button id="btnRecord"><img src="icns/record-30.png" alt=""></button>
-        <button id="btnStop"><img src="icns/stop-30.png" alt=""></button>
-      </div>
-      <div class="row2">
-        <button id="btnUpload"><img src="icns/eject-30.png" alt=""></button>
-      </div>
-    </div>
+  <div class="displayError hide" id="displayError">
+    <p class="error" id="txtError"></p>
   </div>
-  <div class="tutorial">
-    <h2>Come funziona?</h2>
-    <h3>Realizzare il tuo brano<br>è semplice</h3>
-    <ul>
-      <li><img src="icns/headphones-30.png" alt="">
-        <p>utilizza le cuffie</p>
-      </li>
-      <li><img src="icns/record-30.png" alt="">
-        <p>per registrare</p>
-      </li>
-      <li><img src="icns/stop-30.png" alt="">
-        <p>per interrompere</p>
-      </li>
-      <li><img src="icns/play-30.png" alt="">
-        <p>per riprodurre</p>
-      </li>
-      <li><img src="icns/eject-30.png" alt="">
-        <p>per inviare</p>
-      </li>
-    </ul>
-    <h1>Campiono<br>Cose
-      <span class="beta">beta</span>           
-    </h1>
+  <div class="main">
+    <div class="sampler">   
+      <div class="videos" id="videos">
+        <video id="liveVideo" muted="true" playsinline="" autoplay=""></video>
+        <video class="hide" id="storedVideo" type="video/webm" playsinline="">
+          <audio id="audio" controls="" preload="auto">
+            <source src="idea1.mp3" type="audio/mpeg">
+          </audio>
+        </video>
+        <div class="mic-setup hidden" id="micSetup">
+          <div class="selection">Seleziona Microfono</div>
+          <div id="devices">
+            <!-- where the devices go-->
+          </div>
+        </div><img class="mic-icon half-opacity" id="btnMic" src="icns/mic-icon.svg" alt="Microphone choice icon">
+      </div>
+      <div id="buttons">
+        <div class="row1">   
+          <button id="btnPlay"><img src="icns/play.png" width="32" alt=""></button>
+          <button id="btnRecord"><img src="icns/rec.png" width="50" alt=""></button>
+          <button id="btnStop"><img src="icns/stop.png" width="32" alt=""></button>
+        </div>
+        <div class="row2">
+          <button id="btnUpload"><img src="icns/5_info.png" width="32" alt=""></button>
+        </div>
+      </div>
+    </div>
+    <div class="tutorial">
+      <h2>Come funziona?</h2>
+      <h3>Realizzare il tuo brano<br>è semplice</h3>
+      <ul>
+        <li><img src="icns/1_info.png" width="30" alt="">
+          <p>utilizza le cuffie</p>
+        </li>
+        <li><img src="icns/2_info.png" width="30" alt="">
+          <p>per registrare</p>
+        </li>
+        <li><img src="icns/3_info.png" width="30" alt="">
+          <p>per interrompere</p>
+        </li>
+        <li><img src="icns/4_info.png" width="30" alt="">
+          <p>per riprodurre</p>
+        </li>
+        <li><img src="icns/5_info.png" width="30" alt="">
+          <p>per inviare</p>
+        </li>
+      </ul>
+      <h1>Campiono<br>Cose
+        <span class="beta">beta</span>           
+      </h1>
+    </div>
   </div>
 </div>
 <script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>

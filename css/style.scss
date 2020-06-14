@@ -43,21 +43,11 @@ $cc-pink: #fc29fc;
 
 /* SETUP */
 html,
-body {  
+body {
   width: 100%;
-  height: 100%;
+  min-width: 320px;
   font-family: "agrandir";
   background-color: $cc-blue;
-}
-
-/* MAIN STYLE */
-.container {
-  width: inherit;
-  height: inherit;
-  display: flex;
-  flex-flow: row wrap;
-  color: white;
-  justify-content: center;
 }
 
 /* TEXT STYLING */
@@ -94,38 +84,52 @@ a {
   }
 }
 
-// ERROR
-.displayError {
-  text-align: center;
-  font-weight: 900;
+/* MAIN STYLE */
+.container {
+  margin: 0 auto;
+  color: white;
+  width: 100%;
+  max-width: 786px;
+  padding: 2.5rem;
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
+  flex-flow: column;
   align-items: center;
-  margin: 2rem 1rem 0 1rem;
+}
+
+.main {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(312px, 1fr));
+  justify-items: center;
+  align-items: center;
+}
+
+// ERROR
+.displayError {  
+  width: 312px;
+  margin-bottom: 2.5rem;
 
   .error {
+    text-align: center;
     font-weight: 400;
-    color: white;    
-    max-width: 250px;
+    color: white;
   }
 }
 
 .sampler {
+  justify-self: center;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
   background-color: $cc-darkblue;
   border-radius: 10px;
   padding: 5px;
-  margin: 2rem;
-  align-self: flex-start;
+  margin-bottom: 2.5rem;
 }
 
 .tutorial {
   display: flex;
-  flex-flow: column;
-  margin: 2rem;
+  flex-flow: column;  
 
   h1 {
     font-size: 1.5rem;
@@ -138,19 +142,13 @@ a {
     }
   }
 
-  img {
-    background-color: $cc-lightblue;
-    border-radius: 50%;
-    padding: 3px;
-  }
-
   ul {
     margin-bottom: 2rem;
 
     li {
       display: flex;
       align-items: center;
-      margin: .25rem 0;
+      margin: .5rem 0;
       color: $cc-lightblue;
 
       p {
@@ -210,9 +208,7 @@ a {
 
   button {
     border: 0;
-    background-color: $cc-lightblue;
-    border-radius: 50%;
-    padding: 3px;
+    background: none;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -223,7 +219,6 @@ a {
     }
 
     img {
-      width: 30px;
       pointer-events: none;
     }
   }
@@ -268,17 +263,17 @@ a {
 
 @keyframes recording {
   0% {
-    border: 5px solid #eee;
+    border: 3px solid #eee;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
 
   50% {
-    border: 5px solid #f00;
+    border: 3px solid #f00;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
 
   100% {
-    border: 5px solid #eee;
+    border: 3px solid #eee;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
 }
@@ -289,17 +284,17 @@ a {
 
 @keyframes playing {
   0% {
-    border: 5px solid #eee;
+    border: 3px solid #eee;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
 
   50% {
-    border: 5px solid #0f0;
+    border: 3px solid #0f0;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
 
   100% {
-    border: 5px solid #eee;
+    border: 3px solid #eee;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
 }
@@ -310,17 +305,17 @@ a {
 
 @keyframes uploading {
   0% {
-    border: 5px solid #eee;
+    border: 3px solid #eee;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
 
   50% {
-    border: 5px solid rgb(135, 135, 255);
+    border: 3px solid rgb(135, 135, 255);
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
 
   100% {
-    border: 5px solid #eee;
+    border: 3px solid #eee;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
 }

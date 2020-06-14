@@ -37,19 +37,9 @@
 html,
 body {
   width: 100%;
-  height: 100%;
+  min-width: 320px;
   font-family: "agrandir";
   background-color: #1a23fb;
-}
-
-/* MAIN STYLE */
-.container {
-  width: inherit;
-  height: inherit;
-  display: flex;
-  flex-flow: row wrap;
-  color: white;
-  justify-content: center;
 }
 
 /* TEXT STYLING */
@@ -81,37 +71,51 @@ a:link, a:visited, a:hover {
   text-decoration: none;
 }
 
-.displayError {
-  text-align: center;
-  font-weight: 900;
+/* MAIN STYLE */
+.container {
+  margin: 0 auto;
+  color: white;
+  width: 100%;
+  max-width: 786px;
+  padding: 2.5rem;
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
+  flex-flow: column;
   align-items: center;
-  margin: 2rem 1rem 0 1rem;
+}
+
+.main {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(312px, 1fr));
+  justify-items: center;
+  align-items: center;
+}
+
+.displayError {
+  width: 312px;
+  margin-bottom: 2.5rem;
 }
 
 .displayError .error {
+  text-align: center;
   font-weight: 400;
   color: white;
-  max-width: 250px;
 }
 
 .sampler {
+  justify-self: center;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
   background-color: #171edb;
   border-radius: 10px;
   padding: 5px;
-  margin: 2rem;
-  align-self: flex-start;
+  margin-bottom: 2.5rem;
 }
 
 .tutorial {
   display: flex;
   flex-flow: column;
-  margin: 2rem;
 }
 
 .tutorial h1 {
@@ -125,12 +129,6 @@ a:link, a:visited, a:hover {
   color: #e3e2fb;
 }
 
-.tutorial img {
-  background-color: #e3e2fb;
-  border-radius: 50%;
-  padding: 3px;
-}
-
 .tutorial ul {
   margin-bottom: 2rem;
 }
@@ -138,7 +136,7 @@ a:link, a:visited, a:hover {
 .tutorial ul li {
   display: flex;
   align-items: center;
-  margin: .25rem 0;
+  margin: .5rem 0;
   color: #e3e2fb;
 }
 
@@ -197,9 +195,7 @@ a:link, a:visited, a:hover {
 
 #buttons button {
   border: 0;
-  background-color: #e3e2fb;
-  border-radius: 50%;
-  padding: 3px;
+  background: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -211,7 +207,6 @@ a:link, a:visited, a:hover {
 }
 
 #buttons button img {
-  width: 30px;
   pointer-events: none;
 }
 
@@ -253,15 +248,15 @@ a:link, a:visited, a:hover {
 
 @keyframes recording {
   0% {
-    border: 5px solid #eee;
+    border: 3px solid #eee;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
   50% {
-    border: 5px solid #f00;
+    border: 3px solid #f00;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
   100% {
-    border: 5px solid #eee;
+    border: 3px solid #eee;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
 }
@@ -272,15 +267,15 @@ a:link, a:visited, a:hover {
 
 @keyframes playing {
   0% {
-    border: 5px solid #eee;
+    border: 3px solid #eee;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
   50% {
-    border: 5px solid #0f0;
+    border: 3px solid #0f0;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
   100% {
-    border: 5px solid #eee;
+    border: 3px solid #eee;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
 }
@@ -291,15 +286,15 @@ a:link, a:visited, a:hover {
 
 @keyframes uploading {
   0% {
-    border: 5px solid #eee;
+    border: 3px solid #eee;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
   50% {
-    border: 5px solid #8787ff;
+    border: 3px solid #8787ff;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
   100% {
-    border: 5px solid #eee;
+    border: 3px solid #eee;
     box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.25);
   }
 }
