@@ -1,37 +1,42 @@
 function exit(e) {
-  if (e.state == 'success') {
-    videos.classList.remove('uploadingState');
+  if (e.state == "success") {
+    videos.classList.remove("uploadingState");
   }
 }
 
 function database() {
   if (window.recorderVideo && !hasUserUploaded) {
     let blob = new Blob(window.recorderVideo, {
-      type: 'video/webm'
+      type: "video/webm",
     });
     let date = new Date();
     let time = date.getTime();
     blob.id = time;
 
     let storageRef = firebase.storage().ref();
-    let uploadTask = storageRef.child('user-videos/' + blob.id + '.webm').put(blob).then(exit);
-    videos.classList.add('uploadingState');
+    // Upload task
+    storageRef
+      .child("user-videos/" + blob.id + ".webm")
+      .put(blob)
+      .then(exit);
+
+    videos.classList.add("uploadingState");
     hasUserUploaded = true;
     console.log(hasUserUploaded);
   } else if (hasUserUploaded == true) {
-    alert('Hai già caricato un video. Aggiorna per farne un altro.')
+    alert("Hai già caricato un video. Aggiorna per farne un altro.");
   } else if (!window.recorderVideo) {
-    alert('Crea un video prima di premere upload.')
+    alert("Crea un video prima di premere upload.");
   }
 }
 
 function switchVideos(fromWhere) {
-  let storedVideo = document.getElementById('storedVideo');
-  if (fromWhere == 'record') {
-    storedVideo.classList.add('hide');
+  let storedVideo = document.getElementById("storedVideo");
+  if (fromWhere == "record") {
+    storedVideo.classList.add("hide");
   }
-  if (fromWhere == 'stop') {
-    storedVideo.classList.remove('hide');
+  if (fromWhere == "stop") {
+    storedVideo.classList.remove("hide");
   }
 }
 
@@ -40,21 +45,21 @@ function storeVideo(fromWhere) {
     window.recorderVideo = [];
     window.recorderVideo.push(e.data);
     let blob = new Blob(window.recorderVideo, {
-      type: 'video/webm'
-    })
+      type: "video/webm",
+    });
     storedVideo.src = URL.createObjectURL(blob);
 
-    if (fromWhere == 'upload') {
+    if (fromWhere == "upload") {
       database(blob);
     }
-  }
+  };
 }
 
 function daw(control) {
-  let audio = document.getElementById('audio');
-  let storedVideo = document.getElementById('storedVideo');
+  let audio = document.getElementById("audio");
+  let storedVideo = document.getElementById("storedVideo");
 
-  if (control == 'record') {
+  if (control == "record") {
     console.log(`record triggered at: ` + window.audioCtx.currentTime);
     window.recorder.start();
     window.recorder.onstart = function () {
@@ -64,48 +69,45 @@ function daw(control) {
       console.log(`audio played at: ` + window.audioCtx.currentTime);
     };
 
-    videos.classList.add('recordingState');
-    return switchVideos('record');
+    videos.classList.add("recordingState");
+    return switchVideos("record");
   }
-  if (control == 'stop') {
-    if (window.recorder.state == 'recording') {
+  if (control == "stop") {
+    if (window.recorder.state == "recording") {
       window.recorder.stop();
     }
     audio.pause();
     if (storedVideo.src) storedVideo.pause();
-    storeVideo('stop');
-    videos.classList.remove('recordingState', 'playingState');
-    switchVideos('stop');
+    storeVideo("stop");
+    videos.classList.remove("recordingState", "playingState");
+    switchVideos("stop");
   }
-  if (control == 'play') {
-    if (window.recorder.state == 'inactive' && storedVideo.src) {
-      switchVideos('stop');
+  if (control == "play") {
+    if (window.recorder.state == "inactive" && storedVideo.src) {
+      switchVideos("stop");
       storedVideo.currentTime = 0;
-      audio.currentTime = 0;
-      storedVideo.play();
-      setTimeout(() => {        
-        audio.play();
-      }, 100);
-    }
-    if (window.recorder.state == 'recording') {
-      window.recorder.stop();
-      switchVideos('stop');
-      storeVideo('play');
-    }
-    if (window.recorder.state == 'inactive' && !storedVideo.src) {
       audio.currentTime = 0;
       audio.play();
     }
-    videos.classList.add('playingState');
+    if (window.recorder.state == "recording") {
+      window.recorder.stop();
+      switchVideos("stop");
+      storeVideo("play");
+    }
+    if (window.recorder.state == "inactive" && !storedVideo.src) {
+      audio.currentTime = 0;
+      audio.play();
+    }
+    videos.classList.add("playingState");
   }
 }
 
 function handleVisibilityChange() {
-  if (document.visibilityState == 'visible') {
+  if (document.visibilityState == "visible") {
     start();
   } else {
     if (window.stream) {
-      window.stream.getTracks().forEach(track => {
+      window.stream.getTracks().forEach((track) => {
         track.stop();
       });
     }
@@ -118,15 +120,14 @@ function gotAudio() {
     window.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     audioCtx = window.audioCtx;
 
-    let DOMmusic = document.getElementById('audio');
-    let DOMaudio = document.getElementById('storedVideo');
+    let DOMmusic = document.getElementById("audio");
+    let DOMaudio = document.getElementById("storedVideo");
     let music = audioCtx.createMediaElementSource(DOMmusic);
     let audio = audioCtx.createMediaElementSource(DOMaudio);
 
     let musicGain = audioCtx.createGain();
-    let bpFilter = audioCtx.createBiquadFilter();
 
-    musicGain.gain.value = .75;
+    musicGain.gain.value = 0.75;
 
     music.connect(musicGain).connect(audioCtx.destination);
     audio.connect(audioCtx.destination);
@@ -134,49 +135,49 @@ function gotAudio() {
 }
 
 function gotDevices(devicesInfos) {
-  let audioInputSelect = document.getElementById('devices');
+  let audioInputSelect = document.getElementById("devices");
   audioInputSelect.innerHTML = null;
 
   for (let deviceInfo of devicesInfos) {
-    let device = document.createElement('div');
+    let device = document.createElement("div");
     device.innerHTML = deviceInfo.label;
     device.dataset.id = deviceInfo.deviceId;
-    if (deviceInfo.kind === 'audioinput') {
+    if (deviceInfo.kind === "audioinput") {
       audioInputSelect.appendChild(device);
     }
   }
 }
 
 function gotStream(stream) {
-  let videoElement = document.getElementById('liveVideo');
+  let videoElement = document.getElementById("liveVideo");
   window.stream = stream;
   videoElement.srcObject = stream;
   window.recorder = new MediaRecorder(stream, {
     audioBitsPerSecond: 128000,
     videoBitsPerSecond: 2500000,
-    mimeType: 'video/webm'
+    mimeType: "video/webm",
   });
   return navigator.mediaDevices.enumerateDevices();
 }
 
 function handleErrors(e) {
   console.log(e);
-  let displayError = document.getElementById('displayError');
-  let txtError = document.getElementById('txtError');
-  displayError.classList.remove('hide');
+  let displayError = document.getElementById("displayError");
+  let txtError = document.getElementById("txtError");
+  displayError.classList.remove("hide");
 
-  if (e.name == 'NotAllowedError') {
-    txtError.innerHTML = `Qualcosa è andato storto.<br>Aggiorna, e assicurati di aver abilitato microfono e videocamera.`
+  if (e.name == "NotAllowedError") {
+    txtError.innerHTML = `Qualcosa è andato storto.<br>Aggiorna, e assicurati di aver abilitato microfono e videocamera.`;
   }
 
-  if (e == 'BrowserError') {
-    txtError.innerHTML = `Ci dispiace, per ora il tuo browser non è supportato. Ti preghiamo di utilizzare Chrome su desktop.`
+  if (e == "BrowserError") {
+    txtError.innerHTML = `Ci dispiace, per ora il tuo browser non è supportato. Ti preghiamo di utilizzare Chrome su desktop.`;
   }
 }
 
 function start(source) {
   if (window.stream) {
-    window.stream.getTracks().forEach(track => {
+    window.stream.getTracks().forEach((track) => {
       track.stop();
     });
   }
@@ -189,8 +190,8 @@ function start(source) {
     noiseSuppression: false,
     latency: 0,
     volume: 1.0,
-    autoGainControl: true
-  }
+    autoGainControl: true,
+  };
 
   if (source) {
     audioInput.deviceId = source;
@@ -203,72 +204,78 @@ function start(source) {
       width: {
         min: 640,
         ideal: 720,
-        max: 1280
+        max: 1280,
       },
       height: {
         min: 640,
         ideal: 720,
-        max: 1280
+        max: 1280,
       },
-      aspectRatio: 1
-    }
-  }
+      aspectRatio: 1,
+    },
+  };
 
-  if (window.MediaRecorder && ua.browser.family.includes('Chrome') || ua.browser.family.includes('Firefox')) {
-    navigator.mediaDevices.getUserMedia(constraints)
+  if (
+    (window.MediaRecorder && ua.browser.family.includes("Chrome")) ||
+    ua.browser.family.includes("Firefox")
+  ) {
+    navigator.mediaDevices
+      .getUserMedia(constraints)
       .then(gotStream)
       .then(gotDevices)
       .then(gotAudio)
       .catch(handleErrors);
   } else {
-    handleErrors('BrowserError');
+    handleErrors("BrowserError");
   }
 }
 
 // event listeners
-let audioDevices = document.getElementById('devices');
-let buttons = document.getElementById('buttons');
-let btnStop = document.getElementById('btnStop');
-let storedVideo = document.getElementById('storedVideo');
-let audio = document.getElementById('audio');
-let btnUpload = document.getElementById('btnUpload');
+let audioDevices = document.getElementById("devices");
+let buttons = document.getElementById("buttons");
+let btnStop = document.getElementById("btnStop");
+let storedVideo = document.getElementById("storedVideo");
+let audio = document.getElementById("audio");
+let btnUpload = document.getElementById("btnUpload");
 let hasUserUploaded = false;
-let btnMic = document.getElementById('btnMic');
-let micSetup = document.getElementById('micSetup');
+let btnMic = document.getElementById("btnMic");
+let micSetup = document.getElementById("micSetup");
 let audioCtx;
 let ua = detect.parse(navigator.userAgent);
-let videos = document.getElementById('videos');
+let videos = document.getElementById("videos");
 
-audioDevices.addEventListener('click', (e) => {
+audio.crossOrigin = 'anonymous';
+
+audioDevices.addEventListener("click", (e) => {
   audioSourceSelect = e.target.dataset.id;
   start(audioSourceSelect);
 });
 
-buttons.addEventListener('click', (e) => {
-  if (e.target.id == 'btnRecord') {
+buttons.addEventListener("click", (e) => {
+  if (e.target.id == "btnRecord") {
     console.log(`record pressed at: ` + window.audioCtx.currentTime);
-    daw('record');
+    daw("record");
   }
-  if (e.target.id == 'btnStop') {
-    daw('stop');
+  if (e.target.id == "btnStop") {
+    daw("stop");
   }
-  if (e.target.id == 'btnPlay') {
-    daw('play');
+  if (e.target.id == "btnPlay") {
+    daw("play");
   }
-  if (e.target.id == 'btnUpload') {
+  if (e.target.id == "btnUpload") {
     database();
   }
 });
 
 storedVideo.onended = () => {
-  daw('play');
-}
+  daw("play");
+};
 
 btnMic.onclick = () => {
-  micSetup.classList.toggle('hidden');
-  btnMic.classList.toggle('half-opacity');
-}
+  micSetup.classList.toggle("hidden");
+  btnMic.classList.toggle("half-opacity");
+};
 
-document.addEventListener('visibilitychange', handleVisibilityChange);
+document.addEventListener("visibilitychange", handleVisibilityChange);
 
 start();
